@@ -15,6 +15,7 @@ namespace Testa_EF
         {
             using var context = new AppDbContext();
             IGenericRepository<User> repository = new GenericRepository<User>(context);
+            IGenericRepository<Availability> repository1 = new GenericRepository<Availability>(context);
 
             // CRUD FOR USERS
 
@@ -24,10 +25,9 @@ namespace Testa_EF
             Console.WriteLine(user.Name);*/
 
             //CREATE
-            /*var user = new User()
+            /*var user = new VipUser()
             {
-                Name = "Volodea",
-                BirthDate = new DateTime(2000, 12, 20)
+                Bonus = 3
             };
 
             await repository.Add(user);*/
@@ -57,7 +57,78 @@ namespace Testa_EF
             };
             await repository.Remove(user);*/
 
+            //READ WITH CONDITION
+            /*IEnumerable<User> users = (IEnumerable < User > ) await repository.GetWhere(x => x.Id > 5);
+
+            foreach (User item in users)
+            {
+                Console.WriteLine(item.Name);
+            }*/
+
             // END CRUD FOR USERS
+
+            //Concurency EXCEPTION
+
+            /*try
+            {
+                using var context2 = new AppDbContext();
+                IGenericRepository<User> repository2 = new GenericRepository<User>(context2);
+
+                User user1 = await repository.GetById(1);
+                User user2 = await repository2.GetById(1);
+
+                user1.Name = "aboba";
+                user2.Name = "abobus";
+
+                await repository.Update(user1);
+                await repository2.Update(user2);
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+
+            }*/
+
+            //CASCADE SAVE, UPDATE, DELETE
+
+            //SAVE
+            /*var user = new User()
+            {
+                Name = "Gheorghe"
+            };
+
+            user.Availabilities = new List<Availability>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                var freeHour = new Availability()
+                {
+                    Hour = i * 4 + 1,
+                    Minute = 0,
+                    DayOfWeek = 1,
+                    User = user
+                };
+
+                user.Availabilities.Add(freeHour);
+            }
+
+            await repository.Add(user);*/
+
+            //DELETE
+            /*var user = await repository.GetById(105);
+
+            await repository.Remove(user);*/
+
+            //UPDATE
+            /*var user = await repository.GetById(105);
+
+            user.Name = "Gheorghe updated";
+
+            foreach (var item in user.Availabilities)
+            {
+                item.Hour--;
+            }
+
+            await repository.Update(user);*/
 
             /*var query = from availabilities in context.Availabilities
                         group availabilities by availabilities.UserId into a
@@ -118,15 +189,15 @@ namespace Testa_EF
                             users
                         };*/
 
-            /*var query = from availabilities in context.Availabilities
+            var query = from availabilities in context.Availabilities
                         from users in context.Users.Select(x => x.Name + " " + availabilities.DayOfWeek)
                         select new
                         {
                             availabilities,
                             users
                         };
-*/
-            //var result = query.ToList();
+
+            var result = query.ToList();
 
 
 

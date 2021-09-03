@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Testa_EF;
 
 namespace Testa_EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210902022926_add_rowversion")]
+    partial class add_rowversion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,27 +133,6 @@ namespace Testa_EF.Migrations
                     b.ToTable("Hobbies");
                 });
 
-            modelBuilder.Entity("Testa_EF.Models.TestEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestEntities");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("TestEntity");
-                });
-
             modelBuilder.Entity("Testa_EF.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -165,37 +146,11 @@ namespace Testa_EF.Migrations
                         .HasDefaultValueSql("GetDate()");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Testa_EF.Models.TestEntity1", b =>
-                {
-                    b.HasBaseType("Testa_EF.Models.TestEntity");
-
-                    b.Property<int>("Balance")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("TestEntity1");
-                });
-
-            modelBuilder.Entity("Testa_EF.Models.TestEntity2", b =>
-                {
-                    b.HasBaseType("Testa_EF.Models.TestEntity");
-
-                    b.Property<int>("Bonus")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("TestEntity2");
                 });
 
             modelBuilder.Entity("Testa_EF.Models.PaidUser", b =>
