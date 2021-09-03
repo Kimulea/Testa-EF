@@ -13,8 +13,8 @@ namespace Testa_EF.Models
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public AditionalInfo AditionalInfo { get; set; }
-        public ICollection<Group> Groups { get; set; }
-        public ICollection<Availability> Availabilities { get; set; }
+        public virtual AditionalInfo AditionalInfo { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Availability> Availabilities { get; set; }
     }
 }

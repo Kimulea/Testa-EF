@@ -12,6 +12,6 @@ namespace Testa_EF.Models
         public int Minute { get; set; }
         public int DayOfWeek { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -15,7 +15,10 @@ namespace Testa_EF
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=ExamplesEF;Integrated Security=True");
+
+                optionsBuilder
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer("Server=.;Database=ExamplesEF;Integrated Security=True");
             }
         }
 

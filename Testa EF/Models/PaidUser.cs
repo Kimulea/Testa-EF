@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Testa_EF.Models
 {
-    class PaidUser : User
+    public class PaidUser : User
     {
         public int Balance { get; set; }
     }

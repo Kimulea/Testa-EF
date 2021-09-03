@@ -189,15 +189,21 @@ namespace Testa_EF
                             users
                         };*/
 
-            var query = from availabilities in context.Availabilities
+            /*var query = from availabilities in context.Availabilities
                         from users in context.Users.Select(x => x.Name + " " + availabilities.DayOfWeek)
                         select new
                         {
                             availabilities,
                             users
+                        };*/
+
+            /*var query = from users in context.Users
+                        select new
+                        {
+                            hour = users.Availabilities.Any() ? users.Availabilities.DefaultIfEmpty().Average(r => r.Hour) : 0
                         };
 
-            var result = query.ToList();
+            var result = query.ToList();*/
 
 
 
@@ -205,6 +211,21 @@ namespace Testa_EF
             {
                 Console.WriteLine(item.Count);
             }*/
+
+            // PREGATIRE EXMAEN
+
+            /*var result = context.Users.Join(context.Availabilities,
+                u => u.Id,
+                a => a.UserId,
+                (u, a) => new { user = u, availability = a }).ToList();*/
+
+            /*var result = context.Users.SelectMany(x => x.Availabilities, (b, r) => new
+            {
+                name = b.Name,
+                hour = r.Hour
+            }).ToList();*/
+
+
         }
     }
 }

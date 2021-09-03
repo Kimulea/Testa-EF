@@ -12,7 +12,7 @@ namespace Testa_EF.Models
         
         public string Description { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
-        public ICollection<Hobby> Hobbies { get; set; }
+        public virtual User User { get; set; }
+        public virtual ICollection<Hobby> Hobbies { get; set; }
     }
 }

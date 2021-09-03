@@ -9,6 +9,6 @@ namespace Testa_EF.Models
     public class Hobby : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<AditionalInfo> AditionalInfos { get; set; }
+        public virtual ICollection<AditionalInfo> AditionalInfos { get; set; }
     }
 }
